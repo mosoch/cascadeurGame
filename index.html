@@ -1,0 +1,96 @@
+<html>
+ <head>
+  <title>Le Jeu Mr. Cascadeur</title>
+  <script>
+  function highScores()
+  {
+    var ajaxRequest;  // The variable that makes Ajax possible!
+
+    try
+    {
+      // Opera 8.0+, Firefox, Safari
+      ajaxRequest = new XMLHttpRequest();
+    }
+    catch (e)
+    {
+      // Internet Explorer Browsers
+      try
+      {
+        ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+      }
+      catch (e)
+      {
+        try
+        {
+          ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        catch (e)
+        {
+          // Something went wrong
+          alert("Your browser broke!");
+          return false;
+        }
+      }
+    }
+
+    // Create a function that will receive data sent from the server
+
+    ajaxRequest.onreadystatechange = function()
+    {
+      if(ajaxRequest.readyState == 4)
+      {
+        var ajaxDisplay = document.getElementById('scoreDiv');
+        ajaxDisplay.innerHTML = ajaxRequest.responseText;
+      }
+    }
+
+  	ajaxRequest.open("GET", "postHighScores.php", true);
+  	ajaxRequest.send(null);
+
+
+
+}
+  </script>
+ </head>
+ <body onLoad="highScores()">
+  <table border="0">
+   <tr>
+    <td valign="top" width="80%">
+  <form name="userForm" action="casc02.php" method="get">
+   <b>Veuillez entrer un nom d'utilisateur :</b><br />
+   <input name="userName" type="text" size="40" maxlength="32"><br /><br />
+   <b>Difficulté :</b><br />
+   <input name="userDiff" type="radio" value="easy">Débutant<br />
+   <input name="userDiff" type="radio" value="hard">Expert<br /><br />
+   <input name="userSubmit" type="submit" value="Jouer">
+  </form>
+
+  <br />
+  <br />
+  <b><u>Commandes :</b></u><br />
+  <br />
+  <br />
+  Les flèches pour s'orienter, puis avancer. La touche B permet aussi d'avancer. La barre d'espace permet de tirer.  <br />
+  <br />
+  P pour mettre en pause le jeu, Q pour afficher votre score, A pour afficher les monstres restant, C pour entrer un code.  <br />
+  <br />
+  <br />
+  <b><u>Instructions :</b></u><br />
+  <br />
+  <br />
+  M. Cascadeur <img height="30" width="30" src="cascadeur0.bmp"> se déplace dans la montagne des monstres, un endroit parsemé de buissons<img height="30" width="30" src="bush.bmp"> et de rochers<img height="30" width="30" src="rock.bmp">, il y cherche un bijou <img height="30" width="30" src="gem1.bmp">. Mais il faut éviter les monstres ! Les petits monstres <img height="30" width="30" src="littleMonster1.bmp">sont des êtres torturés et frêles qui tirent des balles <img height="30" width="30" src="bullet.bmp"> sur tout et rien. Si vous arrivez à éviter les balles vous pouvez les écraser<img height="30" width="30" src="cascadeurLittleMonster2.bmp"> ou les faire exploser<img height="30" width="30" src="littleMonsterDead.bmp"> avec votre arc à flèches <img height="30" width="30" src="arrow3.bmp">. Les gros monstres <img height="30" width="30" src="bigMonster0.bmp">sont plus dangereux : vous ne pouvez pas les écraser, il faut en venir à bout à coup de flèches<img height="30" width="30" src="bigMonsterDead.bmp"> .<br />
+  <br />
+  <br />
+  M. Cascadeur regagne son énergie grâce à la nourriture <img height="30" width="30" src="icon25.bmp"> ou en cas de nécessité extrême, les packs médicaux <img height="30" width="30" src="icon99.bmp">. Il regagne aussi des flèches <img height="30" width="30" src="icon10.bmp">.<br />
+  <br />
+  <br />
+  Pour commencer, cherchez d'abord la clé en or <img height="30" width="30" src="goldKey.bmp">. Et attention au Coccyclops...
+
+   </td>
+   <td height="center" align="center" valign="top">
+     <div id="scoreDiv"></div>
+   </td>
+  </tr>
+  </table>
+ </body>
+</html>
